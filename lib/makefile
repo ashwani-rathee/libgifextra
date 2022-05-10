@@ -1,10 +1,10 @@
 CC=gcc
-CFLAGS=-I./include -fPIC 
+CFLAGS=-I../include -fPIC 
 DEPS = libgifextra.h 
 PREFIX = /workspace/destdir
 
 all: libgifextra
-UNAME_S := $(shell uname -s)
+UNAME_S := $(shell uname -s);
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS) -lgif
@@ -32,8 +32,21 @@ ifeq ($(PREFIX),)
 	PREFIX := /usr/local
 endif
 
+# make install
+# ------------
+# To install the shared objects in their respective locations
+
 install: libgifextra.so
-	install -d /workspace/destdir/lib/
-	install -m 644 libgifextra.so /workspace/destdir/lib/
-	install -d /workspace/destdir/include/
-	install -m 644 libgifextra.h /workspace/destdir/include/
+	install -d $(PREFIX)/lib/
+	install -m 644 libgifextra.so $(PREFIX)/lib/
+	install -d $(PREFIX)/include/
+	install -m 644 include/libgifextra.h $(PREFIX)/include/
+
+
+# make clean 
+# ----------
+# To remove .o,.a,.so files in the current directory
+
+clean :
+	-rm *.o *.a *.so 
+	echo Cleared

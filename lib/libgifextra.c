@@ -5,7 +5,41 @@
 #include <io.h>
 #endif /* _WIN32 */
 
-#define PROGRAM_NAME "gif2rgb"
+/*****************************************************************************
+
+Parts of this particular file are taken up from gif2rgb.c written by GifLib 
+team and functions that we modify slightly and provide here are:
+- LoadRGB
+- GIF2RGB
+- DumpScreen2RGB
+- SaveGif
+- RGB2GIF
+
+Below is the licensing details and comments
+
+gif2rgb - convert GIF to 24-bit RGB pixel triples or vice-versa
+
+SPDX-License-Identifier: MIT
+
+*****************************************************************************/
+
+/***************************************************************************
+
+Toshio Kuratomi had written this in a comment about the rgb2gif code:
+
+  Besides fixing bugs, what's really needed is for someone to work out how to
+  calculate a colormap for writing GIFs from rgb sources.  Right now, an rgb
+  source that has only two colors (b/w) is being converted into an 8 bit GIF....
+  Which is horrendously wasteful without compression.
+
+I (ESR) took this off the main to-do list in 2012 because I don't think
+the GIFLIB project actually needs to be in the converters-and-tools business.
+Plenty of hackers do that; our job is to supply stable library capability
+with our utilities mainly interesting as test tools.
+
+***************************************************************************/
+
+
 
 /******************************************************************************
  Load RGB file into internal frame buffer.
@@ -68,9 +102,6 @@ void LoadRGB(char *FileName,
 
         rgbfp[0] = stdin;
     }
-
-    printf("\n%s: RGB image:     ", PROGRAM_NAME);
-
     if (OneFileFlag)
     {   
         printf("%s\n", FileName);
@@ -193,8 +224,8 @@ void GIF2RGB(int NumFiles, char *FileName,
 		Col = GifFile->Image.Left;
 		Width = GifFile->Image.Width;
 		Height = GifFile->Image.Height;
-		printf("\n%s: Image %d at (%d, %d) [%dx%d]:     ",
-		    PROGRAM_NAME, ++ImageNum, Col, Row, Width, Height);
+		printf("\nImage %d at (%d, %d) [%dx%d]:     ",
+		     ++ImageNum, Col, Row, Width, Height);
 		if (GifFile->Image.Left + GifFile->Image.Width > GifFile->SWidth ||
 		   GifFile->Image.Top + GifFile->Image.Height > GifFile->SHeight) {
 		    fprintf(stderr, "Image %d is not confined to screen dimension, aborted.\n",ImageNum);
@@ -393,8 +424,8 @@ void SaveGif(char *FileName,GifByteType *OutputBuffer,
 	exit(EXIT_FAILURE);
     }
 
-    printf("\n%s: Image 1 at (%d, %d) [%dx%d]:     ",
-	       PROGRAM_NAME, GifFile->Image.Left, GifFile->Image.Top,
+    printf("\nImage 1 at (%d, %d) [%dx%d]:     ",
+	       GifFile->Image.Left, GifFile->Image.Top,
 	       GifFile->Image.Width, GifFile->Image.Height);
 
     for (i = 0; i < Height; i++) {
@@ -446,6 +477,8 @@ void RGB2GIF(bool OneFileFlag, int NumFiles, char *FileName, char *InFileName,
 
     SaveGif(FileName, OutputBuffer, Width, Height, ExpNumOfColors, OutputColorMap);
 }
+
+
 
 GifFileType* returnGIF(char *FileName)
 {
