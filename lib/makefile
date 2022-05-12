@@ -40,7 +40,7 @@ install: libgifextra.so
 	install -d $(PREFIX)/lib/
 	install -m 644 libgifextra.so $(PREFIX)/lib/
 	install -d $(PREFIX)/include/
-	install -m 644 include/libgifextra.h $(PREFIX)/include/
+	install -m 644 ../include/libgifextra.h $(PREFIX)/include/
 
 
 # make clean 
