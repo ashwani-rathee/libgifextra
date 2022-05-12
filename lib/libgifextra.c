@@ -15,7 +15,8 @@ team and functions that we modify slightly and provide here are:
 - SaveGif
 - RGB2GIF
 
-Below is the licensing details and comments
+Below is the licensing details and comments:
+Link: http://giflib.sourceforge.net/gif_lib.html
 
 gif2rgb - convert GIF to 24-bit RGB pixel triples or vice-versa
 
