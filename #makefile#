@@ -1,7 +1,7 @@
 CC=gcc
-CFLAGS=-I../include -fPIC 
+
+CFLAGS=-I./include -fPIC 
 DEPS = libgifextra.h 
-PREFIX = /workspace/destdir
 
 all: libgifextra
 UNAME_S := $(shell uname -s);
@@ -41,10 +41,10 @@ libgifextra: libgifextra.o
 # To install the shared objects in their respective locations
 
 install: libgifextra.$(LIBEXT)
-	install -d $(PREFIX)/lib/
-	install -m 644 libgifextra.$(LIBEXT) $(PREFIX)/lib/
-	install -d $(PREFIX)/include/
-	install -m 644 ../include/libgifextra.h $(PREFIX)/include/
+	install -d $(prefix)/lib/
+	install -m 644 libgifextra.$(LIBEXT) $(prefix)/lib/
+	install -d $(prefix)/include/
+	install -m 644 ./include/libgifextra.h $(prefix)/include/
 
 
 # make clean 
