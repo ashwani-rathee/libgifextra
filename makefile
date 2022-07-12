@@ -51,5 +51,5 @@ install: libgifextra.$(LIBEXT)
 # To remove .o,.a,.so files in the current directory
 
 clean :
-	-rm *.o *.a *.so 
+	-rm *.o *.so 
 	echo Cleared

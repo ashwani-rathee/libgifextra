@@ -1,8 +1,8 @@
-# GifLibExtra
+# libgifextra
 Provides additional APIs for working with GifLib
 
 
-# Library build instructions and installation procedure
+### Library build instructions and installation procedure
 ```
 cd lib
 make 
