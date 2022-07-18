@@ -468,10 +468,10 @@ void RGB2GIF(bool OneFileFlag, int NumFiles, char *FileName, char *InFileName,
 					    sizeof(GifByteType))) == NULL)
 	printf("Failed to allocate memory required, aborted.");
 
-    if (GifQuantizeBuffer(Width, Height, &ColorMapSize,
-		       RedBuffer, GreenBuffer, BlueBuffer,
-		       OutputBuffer, OutputColorMap->Colors) == GIF_ERROR)
-	exit(EXIT_FAILURE);
+    // if (GifQuantizeBuffer(Width, Height, &ColorMapSize,
+	// 	       RedBuffer, GreenBuffer, BlueBuffer,
+	// 	       OutputBuffer, OutputColorMap->Colors) == GIF_ERROR)
+	// exit(EXIT_FAILURE);
     free((char *) RedBuffer);
     free((char *) GreenBuffer);
     free((char *) BlueBuffer);
